@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="icon" href="./img/2048.svg" type="./img/2048.svg">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,700" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.5/lodash.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.js"></script>
+    <script defer src="./js/main.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <!-- main  -->
+<main class="wrapper">
+    <!-- intro -->
+    <div class="intro clearfix">
+     <h1 class="intro_title"> 2048 </h1>
+    </div>
+    <div id="nameModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);z-index:1000;display:flex;justify-content:center;align-items:center;">
+        <div style="background:#261535;padding:30px;border-radius:10px;border:2px solid #f9d49a;text-align:center;">
+          <h2 style="color:#f9d49a">Digite seu nome</h2>
+          <input type="text" id="playerName" placeholder="Seu nome aqui" 
+                 style="padding:15px;font-size:18px;width:100%;margin:20px 0;background:rgba(255,255,255,0.1);border:2px solid #f9d49a;color:white;">
+          <button id="startGameBtn" 
+                  style="padding:10px 20px;background:transparent;color:#f9d49a;border:2px solid #f9d49a;font-size:16px;">
+            Começar Jogo
+          </button>
+        </div>
+      </div>
+      <script>
+        // Solução definitiva para o problema de digitação
+        document.addEventListener('DOMContentLoaded', function() {
+          const nameInput = document.getElementById('playerName');
+          const modal = document.getElementById('nameModal');
+          
+          // Força o foco no campo
+          setTimeout(function() {
+            nameInput.focus();
+          }, 100);
+        
+          // Permite digitação livre
+          nameInput.addEventListener('keydown', function(e) {
+            e.stopPropagation();
+          });
+        
+          // Botão de início
+          document.getElementById('startGameBtn').addEventListener('click', function() {
+            if(nameInput.value.trim() === '') {
+              alert('Por favor, digite seu nome!');
+              nameInput.focus();
+              return;
+            }
+            modal.style.display = 'none';
+            // Inicia o jogo aqui
+            gameStart();
+          });
+          
+          // Fecha modal se clicar fora
+          modal.addEventListener('click', function(e) {
+            if(e.target === modal) {
+              nameInput.focus();
+            }
+          });
+        });
+        </script>
+    <!-- /end intro -->
+    <!-- controls -->
+    <div class="controls clearfix">
+        <div class="controls_game">
+          <button data-js="newGame" class="controls_game-btn"> New Game </button>
+        </div>
+        <div class="controls_score">
+          <span class="controls_score-label">Score </span>
+          <br>
+          <span class="controls_score-text" data-js="score"> </span>
+        </div>
+      </div>
+    <!-- gameboard -->
+    <div id="touchGameboard" class="gameboard">
+     <div class="grid">
+     </div>
+     <div class="tile-container">
+     </div>
+    </div>
+    <div id="rankingModal" class="modal">
+        <div class="modal-content">
+          <h2>Ranking</h2>
+          <div id="rankingList"></div>
+          <button id="closeRankingBtn">Fechar</button>
+        </div>
+      </div>
+    <!-- /end gameboard -->
+    <!-- guide     -->
+<!-- Substitua as seções "guide" no seu HTML por: -->
+
+<section class="guide clearfix">
+    <h2>O que é este jogo?</h2>
+    <p>Este é um clone do famoso 2048, um jogo de raciocínio onde você combina números para alcançar o bloco 2048!</p>
+ </section>
+  
+  <section class="guide clearfix">
+    <h2>Como jogar?</h2>
+    <p><strong>Objetivo:</strong> Combine blocos com o mesmo número para formar blocos maiores e alcance o 2048!</p>
+    
+    <div class="guide_arrow-wrap">
+      <span class="guide_arrow">↑</span>
+      <span class="guide_arrow">←</span>
+      <span class="guide_arrow">→</span>
+      <span class="guide_arrow">↓</span>
+    </div>
+    
+    <p><strong>Controles:</strong></p>
+    <ul style="text-align: left; margin-left: 20px;">
+      <li>Use as <strong>teclas de seta</strong> do teclado</li>
+      <li>Ou <strong>arraste</strong> na tela (em dispositivos móveis)</li>
+    </ul>
+    
+    <p><strong>Regras básicas:</strong></p>
+    <ol style="text-align: left; margin-left: 20px;">
+      <li>Blocos iguais se combinam quando colidem</li>
+      <li>A cada movimento, surge um novo bloco (2 ou 4)</li>
+      <li>O jogo acaba quando o tabuleiro ficar cheio</li>
+      <li>Se conseguir o bloco 2048, você vence!</li>
+    </ol>
+    
+    <p><strong>Dica:</strong> Tente manter seu maior número num canto!</p>
+  </section>
+    
+    <!-- /end guide  -->
+   </main>
+   <!-- /end main  -->
+   
+   <!-- templates -->
+   <script type="text/html" id="template_grid_cell">
+    <div class="grid_cell"></div>
+   </script>
+   
+   <script type="text/html" id="template_tile">
+    <div class="tile">
+     <span class="tile_number"> </span>
+    </div>
+   </script>
+   <!-- /end templates -->
+</body>
+</html>
