@@ -578,7 +578,7 @@ function getRanking() {
     { name: "Kauã Araújo", score: 1582 },
     { name: "Beatriz Candido", score: 1580 },
     { name: "Cesar", score: 1574 },
-    { name: "Cesar", score: 1572 },
+    { name: "CursedXD", score: 1532 },
     { name: "Davi Sam", score: 1302 },
     { name: "Luan", score: 1270 },
     { name: "Sofia", score: 1254 },
