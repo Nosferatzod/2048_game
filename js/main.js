@@ -569,24 +569,43 @@ function saveScore() {
    
 
 
- function getRanking() {
-   let ranking = [];
-   
-   // 1. Pega do localStorage se existir
-   const savedRanking = localStorage.getItem('2048Ranking');
-   if (savedRanking) {
-     ranking = JSON.parse(savedRanking);
-   }
-   
-   // 2. Adiciona a Beatriz se não estiver presente
-   const hasBeatriz = ranking.some(player => player.name === "Beatriz Candido");
-   if (!hasBeatriz) {
-     ranking.push({ name: "Beatriz Candido", score: 1580 });
-   }
-   
-   // 3. Ordena do maior para o menor
-   return ranking.sort((a, b) => b.score - a.score);
- }
+// No seu arquivo main.js, localize a função getRanking() e substitua por:
+
+function getRanking() {
+  // Ranking inicial pré-definido
+  const initialRanking = [
+    { name: "Kauã Araújo", score: 1582 },
+    { name: "Beatriz Candido", score: 1580 },
+    { name: "Luan", score: 1270 },
+    { name: "Sofia", score: 1254 },
+    { name: "Pedro Lucas", score: 1254 },
+    { name: "Soraya", score: 1170 }
+  ];
+
+  // Tenta obter ranking salvo no localStorage
+  const savedRanking = localStorage.getItem('2048Ranking');
+  
+  // Se não existir no localStorage, retorna o inicial
+  if (!savedRanking) {
+    return initialRanking.sort((a, b) => b.score - a.score); // Ordena por score
+  }
+
+  // Se existir, combina com o inicial
+  const mergedRanking = [...JSON.parse(savedRanking), ...initialRanking];
+  
+  // Remove duplicados (mantém a maior pontuação)
+  const uniqueRanking = [];
+  const names = new Set();
+  
+  mergedRanking.sort((a, b) => b.score - a.score).forEach(player => {
+    if (!names.has(player.name)) {
+      names.add(player.name);
+      uniqueRanking.push(player);
+    }
+  });
+
+  return uniqueRanking.slice(0, 10); // Retorna apenas os top 10
+}
 
 function showRanking() {
   const ranking = getRanking();
