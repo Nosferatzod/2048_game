@@ -574,11 +574,11 @@ function saveScore() {
 function getRanking() {
   // Ranking inicial pré-definido
   const initialRanking = [
+    { name: "Cesar", score: 2724 },
     { name: "Kauã Francino", score: 1616 },
     { name: "Kauã Araújo", score: 1582 },
     { name: "Beatriz Candido", score: 1580 },
     { name: "CursedXD", score: 1574 },
-    { name: "Cesar", score: 1572 },
     { name: "Davi Sam", score: 1302 },
     { name: "Luan", score: 1270 },
     { name: "Sofia", score: 1254 },
