@@ -576,7 +576,7 @@ function getRanking() {
   const initialRanking = [
     { name: "Ygor", score: 3740 },
     { name: "Cesar", score: 3608 },
-    { name: "Kauã Francino", score: 1616 },
+    { name: "Kauã Francino", score: 1856 },
     { name: "Kauã Araújo", score: 1582 },
     { name: "Beatriz Candido", score: 1580 },
     { name: "CursedXD", score: 1574 },
