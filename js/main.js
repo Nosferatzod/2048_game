@@ -574,7 +574,7 @@ function saveScore() {
 function getRanking() {
   // Ranking inicial pré-definido
   const initialRanking = [
-    { name: "Cesar", score: 5118 },
+    { name: "Cesar", score: 6716 },
     { name: "Ygor", score: 3740 },
     { name: "Kauã Francino", score: 3630 },
     { name: "Kauã Araújo", score: 1582 },
