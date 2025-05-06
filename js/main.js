@@ -9,8 +9,8 @@ function gameStart() {
    function Game(size) {
     this.rows = size;
     this.columns = size;
-    // board is set as 2d array, with grid cell object for each position
     this.board = [];
+    this.hasWon = false;
     this.boardFlatten = function() {
      return _.flatten(this.board);
     };
@@ -72,15 +72,11 @@ function gameStart() {
     * Initialize tiles
     */
    Game.prototype.initTile = function() {
-    // isGameOver determines whether the game is finished; needs to be run: before and after creating tile
     this.isGameOver();
-    //
     var emptyCell = this.getRandomEmptyCell();
     var tile = new Tile(emptyCell.x, emptyCell.y, game);
-    // isGameOver determines whether the game is finished; needs to be run: before and after creating tile
     this.isGameOver();
-    //
-   };
+};
    /**/
    
    /**
@@ -170,47 +166,48 @@ function gameStart() {
     */
    Game.prototype.isGameOver = function() {
     var gameBoard = this.boardFlatten();
-   
     var is2048 = false;
     var canAnyTileMove = false;
     var hasEmptyCells = false;
-   
+
     // check if 2048
     gameBoard.forEach(function(val, index, array) {
-     val.tilesArray.forEach(function(val, index, array) {
-      if (val.valueProp === 2048) {
-       is2048 = true;
-      }
-     });
+        val.tilesArray.forEach(function(val, index, array) {
+            if (val.valueProp === 2048) {
+                is2048 = true;
+            }
+        });
     });
+
     // check if there are empty cells
     if (this.getEmptyCells().length > 0) {
-     hasEmptyCells = true;
+        hasEmptyCells = true;
     }
+
     // Check if move possible
     gameBoard.forEach(function(val, index, array) {
-     val.tilesArray.forEach(function(val, index, array) {
-      val.moveCheck();
-      if (val.canMove === true) {
-       canAnyTileMove = true;
-      }
-     });
+        val.tilesArray.forEach(function(val, index, array) {
+            val.moveCheck();
+            if (val.canMove === true) {
+                canAnyTileMove = true;
+            }
+        });
     });
-   
-    // if game won
-    if (is2048) {
-     this.gameWon();
-     return true;
+
+    // if game won (e não foi mostrado ainda)
+    if (is2048 && !this.hasWon) {
+        this.hasWon = true; // Marca que já viu a mensagem
+        this.gameWon();
+        return false; // Continua o jogo mesmo após vencer
     } else if (!hasEmptyCells && !canAnyTileMove) {
-     // if no empty cells || no tile can move, the game is lost
-     this.gameLost();
-     return true;
+        // if no empty cells || no tile can move, the game is lost
+        this.gameLost();
+        return true;
     } else {
-     // if there is an empty || a tile can move, return false for isGameOver
-     return false;
+        // if there is an empty || a tile can move, return false for isGameOver
+        return false;
     }
-    //
-   };
+};
    
    /**
     * Get empty cells
