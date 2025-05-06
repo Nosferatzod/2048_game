@@ -577,6 +577,7 @@ function getRanking() {
     { name: "Cesar", score: 6716 },
     { name: "Ygor", score: 3740 },
     { name: "Kauã Francino", score: 3630 },
+    { name: "Neymar (Flavio)", score: 2638 },
     { name: "Kauã Araújo", score: 1582 },
     { name: "Beatriz Candido", score: 1580 },
     { name: "CursedXD", score: 1574 },
