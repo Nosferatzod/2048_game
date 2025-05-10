@@ -573,7 +573,7 @@ function getRanking() {
   const initialRanking = [
     { name: "Ygor", score: 30516 },
     { name: "Cesar", score: 15360 },
-    { name: "Kauã Francino", score: 5700 },
+    { name: "Kauã Francino", score: 10624 },
     { name: "Arthuro", score: 2972 },
     { name: "Dudao", score: 2968 },
     { name: "Neymar (Flavio)", score: 2638 },
